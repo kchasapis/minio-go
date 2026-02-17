@@ -49,8 +49,8 @@ func (err errTag) Error() string {
 }
 
 var (
-	errTooManyObjectTags = &errTag{"BadRequest", "Tags cannot be more than 10"}
-	errTooManyTags       = &errTag{"BadRequest", "Tags cannot be more than 50"}
+	errTooManyObjectTags = &errTag{"BadRequest", "Tags cannot be more than 100"}
+	errTooManyTags       = &errTag{"BadRequest", "Tags cannot be more than 100"}
 	errInvalidTagKey     = &errTag{"InvalidTag", "The TagKey you have provided is invalid"}
 	errInvalidTagValue   = &errTag{"InvalidTag", "The TagValue you have provided is invalid"}
 	errDuplicateTagKey   = &errTag{"InvalidTag", "Cannot provide multiple Tags with the same key"}
@@ -59,11 +59,12 @@ var (
 // Tag comes with limitation as per
 // https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html amd
 // https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions
+// NOTE: Modified for RED S3 compatibility - increased from AWS S3 limits (10/50) to 100
 const (
 	maxKeyLength      = 128
 	maxValueLength    = 256
-	maxObjectTagCount = 10
-	maxTagCount       = 50
+	maxObjectTagCount = 100 // Increased from 10 for RED S3 support
+	maxTagCount       = 100 // Increased from 50 for RED S3 support
 )
 
 // https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions
